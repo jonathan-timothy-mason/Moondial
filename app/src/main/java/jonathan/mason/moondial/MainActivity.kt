@@ -32,4 +32,10 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent) : AppCompatA
         imageViewUpper.setImageResource(currentPhase.drawable)
         textViewPhaseCaption.text = this.getText(currentPhase.string)
     }
+
+    fun cycleBackground(constraintLayout: View) {
+        //constraintLayout.setBackgroundResource(R.drawable.twilight_light)
+       // constraintLayout.setBackgroundResource(R.drawable.twilight_dark)
+        constraintLayout.setBackgroundResource(R.drawable.night_light)
+    }
 }
