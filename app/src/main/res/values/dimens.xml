@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="phase_caption_textsize">20sp</dimen> <!-- Material Design, Heading 6 -->
+</resources>

@@ -12,4 +12,10 @@
     <color name="colorCenter">#0e1144</color>
     <color name="colorEnd">#000000</color>
 
+    <color name="scrim_start">#00000000</color>
+    <color name="scrim_center">#4D000000</color>
+    <color name="scrim_end">#00000000</color>
+
+    <color name="colorPhaseCaption">#FFFFFF</color>
+
 </resources>

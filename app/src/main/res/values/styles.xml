@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PhaseCaption">
+        <item name="android:textSize">@dimen/phase_caption_textsize</item>
+        <item name="android:textColor">@color/colorPhaseCaption</item>
+    </style>
+
 </resources>
