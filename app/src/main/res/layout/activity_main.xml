@@ -32,14 +32,15 @@
 
     <TextView
         android:id="@+id/textViewPhaseCaption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/phase_caption_scrim"
+        style="@style/PhaseCaption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLower"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Phase..." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
