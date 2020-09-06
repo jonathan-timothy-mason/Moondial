@@ -27,7 +27,7 @@ enum class Phases(val drawable: Int, val string: Int) {
          * Get next phase of moon.
          */
         fun getNextPhase(currentPhase: Phases): Phases {
-            return values().filter { p -> p.ordinal == currentPhase.ordinal + 1 }.firstOrNull() ?: NewNoCrescent
+            return values().filter { p -> p.ordinal == currentPhase.ordinal + 1 }.firstOrNull() ?: values()[0]
         }
     }
 }

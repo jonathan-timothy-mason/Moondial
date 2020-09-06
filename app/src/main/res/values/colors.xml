@@ -13,9 +13,12 @@
     <color name="colorScrimCenter">#4D000000</color>
     <color name="colorScrimEnd">#00000000</color>
 
-    <color name="colorDayStart">#FFFFFF</color>
-    <color name="colorDayCenter">@color/colorDay</color>
-    <color name="colorDayEnd">@color/colorSpaceLight</color>
+    <color name="colorDayLightStart">#FFFFFF</color>
+    <color name="colorDayLightEnd">@color/colorDay</color>
+
+    <color name="colorDayDarkStart">#FFFFFF</color>
+    <color name="colorDayDarkCenter">@color/colorDay</color>
+    <color name="colorDayDarkEnd">@color/colorSpaceLight</color>
 
     <color name="colorTwilightLightStart">#9A0C0C</color>
     <color name="colorTwilightLightCenter">#CE9908</color>

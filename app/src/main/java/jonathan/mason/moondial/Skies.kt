@@ -1,21 +1,22 @@
 package jonathan.mason.moondial
 
 /**
- * Types of sky.
+ * Appearances of sky.
  */
 enum class Skies(val drawable: Int) {
-    Day(R.drawable.day),
-    TwighlightLight(R.drawable.twilight_light),
-    TwighlightDark(R.drawable.twilight_dark),
-    NightLight(R.drawable.night_light),
-    NightDark(R.drawable.night_dark);
+    DayLight(R.drawable.sky_day_light),
+    DayDark(R.drawable.sky_day_dark),
+    TwighlightLight(R.drawable.sky_twilight_light),
+    TwighlightDark(R.drawable.sky_twilight_dark),
+    NightLight(R.drawable.sky_night_light),
+    NightDark(R.drawable.sky_night_dark);
 
     companion object {
         /**
-         * Get next type of sky.
+         * Get next appearance of sky.
          */
         fun getNextSky(currentSky: Skies): Skies {
-            return values().filter { p -> p.ordinal == currentSky.ordinal + 1 }.firstOrNull() ?: Day
+            return values().filter { p -> p.ordinal == currentSky.ordinal + 1 }.firstOrNull() ?: values()[0]
         }
     }
 }
