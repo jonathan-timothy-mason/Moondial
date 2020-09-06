@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient android:startColor="@color/scrim_start"
-        android:centerColor="@color/scrim_center"
-        android:endColor="@color/scrim_end"
+    <gradient android:startColor="@color/colorScrimStart"
+        android:centerColor="@color/colorScrimCenter"
+        android:endColor="@color/colorScrimEnd"
         android:angle="-90"
         android:type="linear"/>
 </shape>

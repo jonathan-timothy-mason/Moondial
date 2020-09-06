@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0e1154</color>
-    <color name="colorPrimaryDark">#0e1144</color>
-    <color name="colorAccent">#FDD835</color>
+    <color name="colorPrimary">@color/colorSpaceLight</color>
+    <color name="colorPrimaryDark">@color/colorSpace</color>
+    <color name="colorAccent">@color/colorTwilightLightCenter</color>
 
     <color name="colorSpace">#0e1144</color>
     <color name="colorSpaceLight">#0e1154</color>
     <color name="colorSpaceDark">#000000</color>
+    <color name="colorDay">#3091FF</color>
 
-    <color name="colorStart">#F9A825</color>
-    <color name="colorCenter">#0e1144</color>
-    <color name="colorEnd">#000000</color>
+    <color name="colorScrimStart">#00000000</color>
+    <color name="colorScrimCenter">#4D000000</color>
+    <color name="colorScrimEnd">#00000000</color>
 
-    <color name="scrim_start">#00000000</color>
-    <color name="scrim_center">#4D000000</color>
-    <color name="scrim_end">#00000000</color>
+    <color name="colorDayStart">#FFFFFF</color>
+    <color name="colorDayCenter">@color/colorDay</color>
+    <color name="colorDayEnd">@color/colorSpaceLight</color>
+
+    <color name="colorTwilightLightStart">#9A0C0C</color>
+    <color name="colorTwilightLightCenter">#CE9908</color>
+    <color name="colorTwilightLightEnd">@color/colorDay</color>
+
+    <color name="colorTwilightDarkStart">#937528</color>
+    <color name="colorTwilightDarkCenter">#25558F</color>
+    <color name="colorTwilightDarkEnd">#191431</color>
+
+    <color name="colorNightLightStart">@color/colorSpaceLight</color>
+    <color name="colorNightLightCenter">@color/colorSpace</color>
+    <color name="colorNightLightEnd">@color/colorSpaceDark</color>
+
+    <color name="colorNightDarkStart">@color/colorSpace</color>
+    <color name="colorNightDarkEnd">@color/colorSpaceDark</color>
 
     <color name="colorPhaseCaption">#FFFFFF</color>
-
 </resources>

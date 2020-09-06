@@ -9,7 +9,7 @@ import android.widget.TextView
 /**
  * Main screen of app, displaying moon and its phases.
  */
-class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent) : AppCompatActivity() {
+class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentSky: Skies = Skies.TwighlightLight) : AppCompatActivity() {
 
     private lateinit var imageViewUpper: ImageView
     private lateinit var textViewPhaseCaption: TextView
@@ -27,15 +27,14 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent) : AppCompatA
         //imageView.rotation = 180.0f
     }
 
-    fun next(button: View) {
+    fun nextPhase(button: View) {
         currentPhase = Phases.getNextPhase(currentPhase)
         imageViewUpper.setImageResource(currentPhase.drawable)
         textViewPhaseCaption.text = this.getText(currentPhase.string)
     }
 
-    fun cycleBackground(constraintLayout: View) {
-        //constraintLayout.setBackgroundResource(R.drawable.twilight_light)
-       // constraintLayout.setBackgroundResource(R.drawable.twilight_dark)
-        constraintLayout.setBackgroundResource(R.drawable.night_light)
+    fun nextSky(constraintLayout: View) {
+        currentSky = Skies.getNextSky(currentSky)
+        constraintLayout.setBackgroundResource(currentSky.drawable)
     }
 }

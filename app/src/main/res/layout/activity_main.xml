@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/twilight_dark"
-    android:onClick="cycleBackground"
+    android:background="@drawable/day"
+    android:onClick="nextSky"
     tools:context=".MainActivity">
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:scaleType="center"
-        android:onClick="next"
+        android:onClick="nextPhase"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
