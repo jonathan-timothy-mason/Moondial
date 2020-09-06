@@ -1,5 +1,10 @@
 package jonathan.mason.moondial
 
+import android.text.format.Time
+import java.util.*
+import java.util.Calendar.DAY_OF_YEAR
+
+
 /**
  * Phases of moon.
  */
@@ -28,6 +33,35 @@ enum class Phases(val drawable: Int, val string: Int) {
          */
         fun getNextPhase(currentPhase: Phases): Phases {
             return values().filter { p -> p.ordinal == currentPhase.ordinal + 1 }.firstOrNull() ?: values()[0]
+        }
+
+        /**
+         * From "Calculate the Moon Phase" by SubsySTEMs:
+         * https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
+         */
+        fun calculateCurrentPhase(): Phases {
+            val jd = Time.getJulianDay(Date().time, 0)
+            val daysSinceNew = jd - 2451549.5
+            val daysSinceNewMoon = daysSinceNew % 29.53
+
+            return when {
+                daysSinceNewMoon in 1.0..3.0 -> WaxingCrescentThin // 2
+                daysSinceNewMoon in 3.0..5.0 -> WaxingCrescent // 4
+                daysSinceNewMoon in 5.0..7.0 -> WaxingCrescentThick  //6
+                daysSinceNewMoon in 7.0..9.0 -> FirstQuarter // 8
+                daysSinceNewMoon in 9.0..11.0 -> WaxingGibbousThin  // 10
+                daysSinceNewMoon in 11.0..13.0 -> WaxingGibbous  //12
+                daysSinceNewMoon in 13.0..15.0 -> WaxingGibbousThick //14
+                daysSinceNewMoon in 15.0..17.0 -> Full // 16
+                daysSinceNewMoon in 17.0..19.0 -> WaningGibbousThick
+                daysSinceNewMoon in 19.0..21.0 -> WaningGibbous
+                daysSinceNewMoon in 21.0..23.0 -> WaningGibbousThin
+                daysSinceNewMoon in 23.0..25.0 -> LastQuarter
+                daysSinceNewMoon in 25.0..27.0 -> WaningCrescentThick
+                daysSinceNewMoon in 27.0..29.0 -> WaningCrescent
+                daysSinceNewMoon in 29.0..31.0 -> WaningCrescentThin
+                else -> NewNoCrescent
+            }
         }
     }
 }

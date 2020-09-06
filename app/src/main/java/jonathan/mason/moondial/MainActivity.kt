@@ -5,7 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import java.util.*
+
+/**
+ * Todo:
+ * Toggle background moon.
+ * Settings.
+ * Toggle hemisphere.
+ */
 
 /**
  * Main screen of app, displaying moon and its phases.
@@ -31,12 +40,14 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentS
         textViewPhaseCaption =  this.findViewById(R.id.textViewPhaseCaption)
         //imageView.rotation = 180.0f
 
+        this.currentPhase = Phases.calculateCurrentPhase()
+
         this.updateUserInterface()
     }
 
     /**
      * Increment to next phase of moon.
-     * @param i C;icked ImageView; unused.
+     * @param i Clicked ImageView; unused.
      */
     fun nextPhase(i: View) {
         currentPhase = Phases.getNextPhase(currentPhase)
