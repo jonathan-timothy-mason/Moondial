@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Moondial</string>
 
-    <string name="new_no_crescent">New</string>
-    <string name="new_crescent">Day Old</string>
+    <string name="new_moon">New Moon</string>
+    <string name="day_old">Day Old</string>
     <string name="waxing_crescent_thin">Waxing Crescent</string>
     <string name="waxing_crescent">Waxing Crescent</string>
     <string name="waxing_crescent_thick">Waxing Crescent</string>
@@ -10,7 +10,7 @@
     <string name="waxing_gibbous_thin">Waxing Gibbous</string>
     <string name="waxing_gibbous">Waxing Gibbous</string>
     <string name="waxing_gibbous_thick">Waxing Gibbous</string>
-    <string name="full">Full</string>
+    <string name="full_moon">Full Moon</string>
     <string name="waning_gibbous_thick">Waning Gibbous</string>
     <string name="waning_gibbous">Waning Gibbous</string>
     <string name="waning_gibbous_thin">Waning Gibbous</string>
