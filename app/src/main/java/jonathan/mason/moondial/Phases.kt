@@ -2,66 +2,103 @@ package jonathan.mason.moondial
 
 import android.text.format.Time
 import java.util.*
-import java.util.Calendar.DAY_OF_YEAR
 
+const val LUNAR_PERIOD = 29.53
+const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 6th January 2000.
 
 /**
  * Phases of moon.
+ *
+ * Each phase has IDs corresponding to image [drawable] and string resource [stringName],
+ * as well as number of days in lunar period at which it is visible.
+ *
+ * Day
+ * 0     New Moon
+ * 1.0   Day Old)
+ * 1.85  Waxing Crescent Thin
+ * 3.69  Waxing Crescent
+ * 5.54  Waxing Crescent Thick
+ * 7.38  First Quarter
+ * 9.23  Waxing Gibbous Thin
+ * 11.07 Waxing Gibbous
+ * 12.92 Waxing Gibbous Thick
+ * 14.77 Full Moon
+ * 16.61 Waning Gibbous Thick
+ * 18.46 Waning Gibbous
+ * 20.30 Waning Gibbous Thin
+ * 22.15 Last Quarter
+ * 23.99 Waning Crescent Thick
+ * 25.84 Waning Crescent
+ * 27.68 Waning Crescent Thin
+ * 29.53 New Moon
  */
-enum class Phases(val drawable: Int, val string: Int) {
-    NewNoCrescent(R.drawable.new_no_crescent, R.string.new_no_crescent),
-    NewCrescent(R.drawable.new_crescent, R.string.new_crescent),
-    WaxingCrescentThin(R.drawable.waxing_crescent_thin, R.string.waxing_crescent_thin),
-    WaxingCrescent(R.drawable.waxing_crescent, R.string.waxing_crescent),
-    WaxingCrescentThick(R.drawable.waxing_crescent_thick, R.string.waxing_crescent_thick),
-    FirstQuarter(R.drawable.first_quarter, R.string.first_quarter),
-    WaxingGibbousThin(R.drawable.waxing_gibbous_thin, R.string.waxing_gibbous_thin),
-    WaxingGibbous(R.drawable.waxing_gibbous, R.string.waxing_gibbous),
-    WaxingGibbousThick(R.drawable.waxing_gibbous_thick, R.string.waxing_gibbous_thick),
-    Full(R.drawable.full, R.string.full),
-    WaningGibbousThick(R.drawable.waning_gibbous_thick, R.string.waning_gibbous_thick),
-    WaningGibbous(R.drawable.waning_gibbous, R.string.waning_gibbous),
-    WaningGibbousThin(R.drawable.waning_gibbous_thin, R.string.waning_gibbous_thin),
-    LastQuarter(R.drawable.last_quarter, R.string.last_quarter),
-    WaningCrescentThick(R.drawable.waning_crescent_thick, R.string.waning_crescent_thick),
-    WaningCrescent(R.drawable.waning_crescent, R.string.waning_crescent),
-    WaningCrescentThin(R.drawable.waning_crescent_thin, R.string.waning_crescent_thin);
+enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
+    NewNoCrescent(R.drawable.new_no_crescent, R.string.new_no_crescent, 0.0),
+    NewCrescent(R.drawable.new_crescent, R.string.new_crescent, 1.0),
+    WaxingCrescentThin(R.drawable.waxing_crescent_thin, R.string.waxing_crescent_thin, LUNAR_PERIOD * 1/16),
+    WaxingCrescent(R.drawable.waxing_crescent, R.string.waxing_crescent, LUNAR_PERIOD * 1/8),
+    WaxingCrescentThick(R.drawable.waxing_crescent_thick, R.string.waxing_crescent_thick, LUNAR_PERIOD * 3/16),
+    FirstQuarter(R.drawable.first_quarter, R.string.first_quarter, LUNAR_PERIOD * 1/4),
+    WaxingGibbousThin(R.drawable.waxing_gibbous_thin, R.string.waxing_gibbous_thin, LUNAR_PERIOD * 5/16),
+    WaxingGibbous(R.drawable.waxing_gibbous, R.string.waxing_gibbous, LUNAR_PERIOD * 3/8),
+    WaxingGibbousThick(R.drawable.waxing_gibbous_thick, R.string.waxing_gibbous_thick, LUNAR_PERIOD * 7/16),
+    Full(R.drawable.full, R.string.full, LUNAR_PERIOD * 1/2),
+    WaningGibbousThick(R.drawable.waning_gibbous_thick, R.string.waning_gibbous_thick, LUNAR_PERIOD * 9/16),
+    WaningGibbous(R.drawable.waning_gibbous, R.string.waning_gibbous, LUNAR_PERIOD * 5/8),
+    WaningGibbousThin(R.drawable.waning_gibbous_thin, R.string.waning_gibbous_thin, LUNAR_PERIOD * 11/16),
+    LastQuarter(R.drawable.last_quarter, R.string.last_quarter, LUNAR_PERIOD * 3/4),
+    WaningCrescentThick(R.drawable.waning_crescent_thick, R.string.waning_crescent_thick, LUNAR_PERIOD * 13/16),
+    WaningCrescent(R.drawable.waning_crescent, R.string.waning_crescent, LUNAR_PERIOD * 7/8),
+    WaningCrescentThin(R.drawable.waning_crescent_thin, R.string.waning_crescent_thin, LUNAR_PERIOD * 15/16);
 
     companion object {
         /**
-         * Get next phase of moon.
+         * Get phase of moon following phase specified by [currentPhase].
          */
         fun getNextPhase(currentPhase: Phases): Phases {
             return values().filter { p -> p.ordinal == currentPhase.ordinal + 1 }.firstOrNull() ?: values()[0]
         }
 
         /**
+         * Get phase of moon most closely corresponding to supplied day [currentDay]
+         * in lunar period.
+         */
+        fun getNearestPhase(currentDay: Double): Phases {
+            // Use Pair to associate Phase and its diff.
+            // Initialise to case not handled by looping through enum values, where
+            // currentDay may be a large number near the end of the lunar period, but
+            // actually nearer to New Moon (0).
+            var nearestPhase = NewNoCrescent to Math.abs(LUNAR_PERIOD - currentDay)
+
+            // Loop to see if another phase is closer to the current day.
+            for(p in values()) {
+                val diff = Math.abs(p.day- currentDay)
+                if(diff < nearestPhase.second)
+                    nearestPhase = p to diff
+            }
+
+            return nearestPhase.first
+        }
+
+        /**
+         * Get current phase of moon.
          * From "Calculate the Moon Phase" by SubsySTEMs:
          * https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
          */
         fun calculateCurrentPhase(): Phases {
-            val jd = Time.getJulianDay(Date().time, 0)
-            val daysSinceNew = jd - 2451549.5
-            val daysSinceNewMoon = daysSinceNew % 29.53
+            val now = Date()
 
-            return when {
-                daysSinceNewMoon in 1.0..3.0 -> WaxingCrescentThin // 2
-                daysSinceNewMoon in 3.0..5.0 -> WaxingCrescent // 4
-                daysSinceNewMoon in 5.0..7.0 -> WaxingCrescentThick  //6
-                daysSinceNewMoon in 7.0..9.0 -> FirstQuarter // 8
-                daysSinceNewMoon in 9.0..11.0 -> WaxingGibbousThin  // 10
-                daysSinceNewMoon in 11.0..13.0 -> WaxingGibbous  //12
-                daysSinceNewMoon in 13.0..15.0 -> WaxingGibbousThick //14
-                daysSinceNewMoon in 15.0..17.0 -> Full // 16
-                daysSinceNewMoon in 17.0..19.0 -> WaningGibbousThick
-                daysSinceNewMoon in 19.0..21.0 -> WaningGibbous
-                daysSinceNewMoon in 21.0..23.0 -> WaningGibbousThin
-                daysSinceNewMoon in 23.0..25.0 -> LastQuarter
-                daysSinceNewMoon in 25.0..27.0 -> WaningCrescentThick
-                daysSinceNewMoon in 27.0..29.0 -> WaningCrescent
-                daysSinceNewMoon in 29.0..31.0 -> WaningCrescentThin
-                else -> NewNoCrescent
-            }
+            // From answer to "How to get UTC offset in seconds in android" by Dan S:
+            // https://stackoverflow.com/questions/7289660/how-to-get-utc-offset-in-seconds-in-android.
+            val offset = TimeZone.getDefault().getOffset(now.time) / 1000
+
+            // From "Calculate the Moon Phase" by SubsySTEMs:
+            // https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
+            val currentJulianDate = Time.getJulianDay(now.time, offset.toLong())
+            val daysSinceNew = currentJulianDate - KNOWN_NEW_MOON_JULIAN_DATE
+            val daysSinceNewMoon = daysSinceNew % LUNAR_PERIOD
+
+            return this.getNearestPhase(daysSinceNewMoon)
         }
     }
 }

@@ -14,12 +14,13 @@ import java.util.*
  * Toggle background moon.
  * Settings.
  * Toggle hemisphere.
+ * Rename NewNoCrescent etc.
  */
 
 /**
  * Main screen of app, displaying moon and its phases.
- * @param currentPhase Current phase of the moon.
- * @param currentSky Current appearance of sky.
+ * Current phase of the moon resides in [currentPhase].
+ * Current appearance of sky resides in [currentSky]
  */
 class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentSky: Skies = Skies.TwighlightDark) : AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentS
 
     /**
      * Perform initialisation of activity.
-     * @param savedInstanceState Saved state of activity; not used.
+     * Saved state of activity [savedInstanceState] is unused.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentS
 
     /**
      * Increment to next phase of moon.
-     * @param i Clicked ImageView; unused.
+     * Clicked ImageView [i] is unused.
      */
     fun nextPhase(i: View) {
         currentPhase = Phases.getNextPhase(currentPhase)
@@ -56,7 +57,7 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentS
 
     /**
      * Increment to next phase of moon.
-     * @param c Clicked ConstraintLayout; unused.
+     * Clicked ConstraintLayout [c] is unused.
      */
     fun nextSky(c: View) {
         currentSky = Skies.getNextSky(currentSky)
@@ -70,6 +71,6 @@ class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentS
     fun updateUserInterface() {
         constraintLayout.setBackgroundResource(currentSky.drawable)
         imageViewUpper.setImageResource(currentPhase.drawable)
-        textViewPhaseCaption.text = this.getText(currentPhase.string)
+        textViewPhaseCaption.text = this.getText(currentPhase.stringName)
     }
 }
