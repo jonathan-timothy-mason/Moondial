@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import java.util.*
 
 /**
  * Todo:
  * Toggle background moon.
  * Settings.
  * Toggle hemisphere.
- * Rename NewNoCrescent etc.
  */
 
 /**
@@ -22,7 +19,7 @@ import java.util.*
  * Current phase of the moon resides in [currentPhase].
  * Current appearance of sky resides in [currentSky]
  */
-class MainActivity(var currentPhase: Phases = Phases.NewNoCrescent, var currentSky: Skies = Skies.TwighlightDark) : AppCompatActivity() {
+class MainActivity(var currentPhase: Phases = Phases.NewMoon, var currentSky: Skies = Skies.TwighlightDark) : AppCompatActivity() {
 
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var imageViewUpper: ImageView

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sky_twilight_dark"
     android:onClick="nextSky"
     tools:context=".MainActivity">
 
@@ -13,7 +12,7 @@
         android:id="@+id/imageViewLower"
         android:layout_width="240dp"
         android:layout_height="240dp"
-        android:src="@drawable/new_no_crescent"
+        android:src="@drawable/new_moon"
         android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

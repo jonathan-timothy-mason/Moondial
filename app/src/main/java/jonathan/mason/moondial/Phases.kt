@@ -33,8 +33,8 @@ const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 6th January 2000.
  * 29.53 New Moon
  */
 enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
-    NewNoCrescent(R.drawable.new_no_crescent, R.string.new_no_crescent, 0.0),
-    NewCrescent(R.drawable.new_crescent, R.string.new_crescent, 1.0),
+    NewMoon(R.drawable.new_moon, R.string.new_moon, 0.0),
+    DayOld(R.drawable.day_old, R.string.day_old, 1.0),
     WaxingCrescentThin(R.drawable.waxing_crescent_thin, R.string.waxing_crescent_thin, LUNAR_PERIOD * 1/16),
     WaxingCrescent(R.drawable.waxing_crescent, R.string.waxing_crescent, LUNAR_PERIOD * 1/8),
     WaxingCrescentThick(R.drawable.waxing_crescent_thick, R.string.waxing_crescent_thick, LUNAR_PERIOD * 3/16),
@@ -42,7 +42,7 @@ enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
     WaxingGibbousThin(R.drawable.waxing_gibbous_thin, R.string.waxing_gibbous_thin, LUNAR_PERIOD * 5/16),
     WaxingGibbous(R.drawable.waxing_gibbous, R.string.waxing_gibbous, LUNAR_PERIOD * 3/8),
     WaxingGibbousThick(R.drawable.waxing_gibbous_thick, R.string.waxing_gibbous_thick, LUNAR_PERIOD * 7/16),
-    Full(R.drawable.full, R.string.full, LUNAR_PERIOD * 1/2),
+    FullMoon(R.drawable.full_moon, R.string.full_moon, LUNAR_PERIOD * 1/2),
     WaningGibbousThick(R.drawable.waning_gibbous_thick, R.string.waning_gibbous_thick, LUNAR_PERIOD * 9/16),
     WaningGibbous(R.drawable.waning_gibbous, R.string.waning_gibbous, LUNAR_PERIOD * 5/8),
     WaningGibbousThin(R.drawable.waning_gibbous_thin, R.string.waning_gibbous_thin, LUNAR_PERIOD * 11/16),
@@ -68,7 +68,7 @@ enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
             // Initialise to case not handled by looping through enum values, where
             // currentDay may be a large number near the end of the lunar period, but
             // actually nearer to New Moon (0).
-            var nearestPhase = NewNoCrescent to Math.abs(LUNAR_PERIOD - currentDay)
+            var nearestPhase = NewMoon to Math.abs(LUNAR_PERIOD - currentDay)
 
             // Loop to see if another phase is closer to the current day.
             for(p in values()) {
