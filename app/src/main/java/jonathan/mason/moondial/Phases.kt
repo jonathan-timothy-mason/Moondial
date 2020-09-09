@@ -11,26 +11,6 @@ const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 6th January 2000.
  *
  * Each phase has IDs corresponding to image [drawable] and string resource [stringName],
  * as well as number of days in lunar period at which it is visible.
- *
- * Day
- * 0     New Moon
- * 1.0   Day Old)
- * 1.85  Waxing Crescent Thin
- * 3.69  Waxing Crescent
- * 5.54  Waxing Crescent Thick
- * 7.38  First Quarter
- * 9.23  Waxing Gibbous Thin
- * 11.07 Waxing Gibbous
- * 12.92 Waxing Gibbous Thick
- * 14.77 Full Moon
- * 16.61 Waning Gibbous Thick
- * 18.46 Waning Gibbous
- * 20.30 Waning Gibbous Thin
- * 22.15 Last Quarter
- * 23.99 Waning Crescent Thick
- * 25.84 Waning Crescent
- * 27.68 Waning Crescent Thin
- * 29.53 New Moon
  */
 enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
     NewMoon(R.drawable.new_moon, R.string.new_moon, 0.0),
