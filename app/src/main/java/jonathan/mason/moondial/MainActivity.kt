@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
  * Toggle background moon.
  * Settings.
  * Toggle hemisphere.
+ * Write test for calculation of day and association with phase
  */
 
 /**
