@@ -4,7 +4,7 @@ import android.text.format.Time
 import java.util.*
 
 const val LUNAR_PERIOD = 29.53
-const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 6th January 2000.
+const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 12:24:01 on 6th January 2000.
 
 /**
  * Phases of moon.

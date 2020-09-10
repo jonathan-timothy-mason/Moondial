@@ -17,6 +17,9 @@ class GetNearestPhaseUnitTest(private val day: Double, private val expectedPhase
     /**
      * Test cases.
      *
+     * Days are rounded to 2 decimal places, otherwise, if following values exactly,
+     * floating point errors can interfere.
+     *
      * 29.53 / 16 = 1.845625
      * 1.845625 / 2 = 0.9228125
      *
@@ -62,31 +65,93 @@ class GetNearestPhaseUnitTest(private val day: Double, private val expectedPhase
         @Parameterized.Parameters
         fun testCases() = listOf(
             // New Moon.
-            arrayOf(28.60718751, Phases.NewMoon),
-            arrayOf(29.53, Phases.NewMoon),
-            arrayOf(0, Phases.NewMoon),
+            arrayOf(0.00, Phases.NewMoon),
             arrayOf(0.49, Phases.NewMoon),
-            arrayOf(0.5, Phases.NewMoon),
+            arrayOf(0.50, Phases.NewMoon),
 
             // Day Old.
             arrayOf(0.51, Phases.DayOld),
-            arrayOf(1, Phases.DayOld),
-            arrayOf(1.4228125, Phases.DayOld),
+            arrayOf(1.00, Phases.DayOld),
+            arrayOf(1.42, Phases.DayOld),
 
             // Waxing Crescent Thin.
-            arrayOf(1.42281251, Phases.WaxingCrescentThin),
-            arrayOf(1.845625, Phases.WaxingCrescentThin),
-            arrayOf(2.7684375, Phases.WaxingCrescentThin),
+            arrayOf(1.43, Phases.WaxingCrescentThin),
+            arrayOf(1.85, Phases.WaxingCrescentThin),
+            arrayOf(2.76, Phases.WaxingCrescentThin),
 
             // Waxing Crescent.
-            arrayOf(2.76843751, Phases.WaxingCrescent),
-            arrayOf(3.69125, Phases.WaxingCrescent),
-            arrayOf(4.6140625, Phases.WaxingCrescent),
+            arrayOf(2.77, Phases.WaxingCrescent),
+            arrayOf(3.69, Phases.WaxingCrescent),
+            arrayOf(4.61, Phases.WaxingCrescent),
 
             // Waxing Crescent Thick.
-            arrayOf(4.61406251, Phases.WaxingCrescentThick),
-            arrayOf(5.536875, Phases.WaxingCrescentThick),
-            arrayOf(6.4596875, Phases.WaxingCrescentThick)
+            arrayOf(4.62, Phases.WaxingCrescentThick),
+            arrayOf(5.54, Phases.WaxingCrescentThick),
+            arrayOf(6.45, Phases.WaxingCrescentThick),
+
+            // First Quarter.
+            arrayOf(6.46, Phases.FirstQuarter),
+            arrayOf(7.38, Phases.FirstQuarter),
+            arrayOf(8.30, Phases.FirstQuarter),
+
+            // Waxing Gibbous Thin.
+            arrayOf(8.31, Phases.WaxingGibbousThin),
+            arrayOf(9.23, Phases.WaxingGibbousThin),
+            arrayOf(10.15, Phases.WaxingGibbousThin),
+
+            // Waxing Gibbous.
+            arrayOf(10.16, Phases.WaxingGibbous),
+            arrayOf(11.07, Phases.WaxingGibbous),
+            arrayOf(11.99, Phases.WaxingGibbous),
+
+            // Waxing Gibbous Thick.
+            arrayOf(12.00, Phases.WaxingGibbousThick),
+            arrayOf(12.92, Phases.WaxingGibbousThick),
+            arrayOf(13.84, Phases.WaxingGibbousThick),
+
+            // Full Moon.
+            arrayOf(13.85, Phases.FullMoon),
+            arrayOf(14.77, Phases.FullMoon),
+            arrayOf(15.68, Phases.FullMoon),
+
+            // Waning Gibbous Thick.
+            arrayOf(15.69, Phases.WaningGibbousThick),
+            arrayOf(16.61, Phases.WaningGibbousThick),
+            arrayOf(17.53, Phases.WaningGibbousThick),
+
+            // Waning Gibbous.
+            arrayOf(17.54, Phases.WaningGibbous),
+            arrayOf(18.46, Phases.WaningGibbous),
+            arrayOf(19.37, Phases.WaningGibbous),
+
+            // Waning Gibbous Thin.
+            arrayOf(19.38, Phases.WaningGibbousThin),
+            arrayOf(20.30, Phases.WaningGibbousThin),
+            arrayOf(21.22, Phases.WaningGibbousThin),
+
+            // Last Quarter.
+            arrayOf(21.23, Phases.LastQuarter),
+            arrayOf(22.15, Phases.LastQuarter),
+            arrayOf(23.07, Phases.LastQuarter),
+
+            // Waning Crescent Thick.
+            arrayOf(23.08, Phases.WaningCrescentThick),
+            arrayOf(23.99, Phases.WaningCrescentThick),
+            arrayOf(24.91, Phases.WaningCrescentThick),
+
+            // Waning Crescent.
+            arrayOf(24.92, Phases.WaningCrescent),
+            arrayOf(25.84, Phases.WaningCrescent),
+            arrayOf(26.76, Phases.WaningCrescent),
+
+            // Waning Crescent Thin.
+            arrayOf(26.77, Phases.WaningCrescentThin),
+            arrayOf(27.68, Phases.WaningCrescentThin),
+            arrayOf(28.60, Phases.WaningCrescentThin),
+
+            // New Moon.
+            arrayOf(28.61, Phases.NewMoon),
+            arrayOf(29.53, Phases.NewMoon)
         )
     }
 
@@ -96,6 +161,6 @@ class GetNearestPhaseUnitTest(private val day: Double, private val expectedPhase
     @Test
     fun getNearestPhaseUnitTest() {
         val actualPhase = Phases.getNearestPhase(day)
-        assertEquals("Incorrect phase for specified day.", expectedPhase, actualPhase)
+        assertEquals("Incorrect phase for specified day ${ day }.", expectedPhase, actualPhase)
     }
 }
