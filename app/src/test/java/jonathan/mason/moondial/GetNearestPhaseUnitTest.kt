@@ -6,8 +6,8 @@ import org.junit.runners.Parameterized
 import org.junit.runner.RunWith
 
 /**
- * Test "getNearestPhase" of "Phases" enum; that expected phases are returned
- * for various days.
+ * Test "getNearestPhase" of "Phases" enum; that expected phase [expectedPhase] is
+ * returned for each day [day].
  *
  * Test cases from "Parameterized JUnit4 test example in Kotlin" by Ross Harper:
  * https://gist.github.com/rossharper/8f6c3c169b6b5c23e12c

@@ -1,10 +1,8 @@
 package jonathan.mason.moondial
 
-import android.text.format.Time
 import java.util.*
 
 const val LUNAR_PERIOD = 29.53
-const val KNOWN_NEW_MOON_JULIAN_DATE = 2451549.5 // 12:24:01 on 6th January 2000.
 
 /**
  * Phases of moon.
@@ -40,10 +38,44 @@ enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
         }
 
         /**
+         * Get current phase of moon.
+         *
+         * According to "Set the Time Zone of a Date in Java" by baeldung, Date() returns the
+         * current date and time in GMT, irrespective of time zone:
+         * https://www.baeldung.com/java-set-date-time-zone.
+         */
+        fun calculateCurrentPhase(): Phases {
+            return this.getNearestPhase(calculateCurrentDays(Date()))
+        }
+
+        /**
+         * Calculate number of days into lunar period for date specified by [date].
+         *
+         * Based on "Calculate the Moon Phase" by SubsySTEMs:
+         * https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
+         *
+         * Time of known new moon from "Phases of the Moon: 1901 to 2000" by Fred Espenak:
+         * http://astropixels.com/ephemeris/phasescat/phases2001.html.
+         */
+        internal fun calculateCurrentDays(date: Date): Double {
+            // Get time of known new moon.
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"))
+            calendar.set(2020, 0, 24, 21, 42)
+            val knownNewMoonDate = calendar.time
+
+            // Get difference between date and known new moon as days.
+            val daysSinceKnownNewMoon =  (date.time - knownNewMoonDate.time) / (1000 * 60 * 60 * 24)
+
+            // Remove complete periods to leave remainder, the number of days into the
+            // current lunar period.
+            return daysSinceKnownNewMoon % LUNAR_PERIOD
+        }
+
+        /**
          * Get phase of moon most closely corresponding to supplied day [currentDay]
          * in lunar period.
          */
-        fun getNearestPhase(currentDay: Double): Phases {
+        internal fun getNearestPhase(currentDay: Double): Phases {
             // Use Pair to associate Phase and its diff.
             // Initialise to case not handled by looping through enum values, where
             // currentDay may be a large number near the end of the lunar period, but
@@ -58,27 +90,6 @@ enum class Phases(val drawable: Int, val stringName: Int, val day: Double) {
             }
 
             return nearestPhase.first
-        }
-
-        /**
-         * Get current phase of moon.
-         * From "Calculate the Moon Phase" by SubsySTEMs:
-         * https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
-         */
-        fun calculateCurrentPhase(): Phases {
-            val now = Date()
-
-            // From answer to "How to get UTC offset in seconds in android" by Dan S:
-            // https://stackoverflow.com/questions/7289660/how-to-get-utc-offset-in-seconds-in-android.
-            val offset = TimeZone.getDefault().getOffset(now.time) / 1000
-
-            // From "Calculate the Moon Phase" by SubsySTEMs:
-            // https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf.
-            val currentJulianDate = Time.getJulianDay(now.time, offset.toLong())
-            val daysSinceNew = currentJulianDate - KNOWN_NEW_MOON_JULIAN_DATE
-            val daysSinceNewMoon = daysSinceNew % LUNAR_PERIOD
-
-            return this.getNearestPhase(daysSinceNewMoon)
         }
     }
 }
