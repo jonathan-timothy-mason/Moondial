@@ -94,6 +94,8 @@ class CalculateCurrentDaysUnitTest(private val date: Date, private val expectedD
 
     /**
      * Actual test.
+     *
+     * Note: test doesn't know days at end of period can be considered close to zero.
      */
     @Test
     fun calculateCurrentDaysUnitTest() {
