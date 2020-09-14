@@ -1,6 +1,7 @@
 package jonathan.mason.moondial
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -15,8 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
  * Todo:
  * Icon.
  * Widget.
- * Make new moon disappear if background moon is turned on amd it's displaying.
- * Add prefs listener.
+ * Reset actual phase.
+ * Acknowledgments.
  */
 
 const val CURRENT_PHASE = "CURRENT_PHASE"
@@ -25,7 +26,7 @@ const val CURRENT_PHASE = "CURRENT_PHASE"
  * Main screen of app, displaying moon and its phases.
  * Current phase of the moon resides in [currentPhase].
  */
-class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity() {
+class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var imageViewForeground: ImageView
@@ -60,12 +61,6 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState?.putSerializable(CURRENT_PHASE, currentPhase)
     }
 
     /**
@@ -108,10 +103,55 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         // Sky.
         val sky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
         constraintLayout.setBackgroundResource(sky.drawable)
+
+        sharedPrefs.registerOnSharedPreferenceChangeListener(this)
     }
 
     /**
-     * Increment to next phase of moon.
+     * Implement to ensure changed shared preferences [sharedPrefs], identified by
+     * key [key] are immediately applied to MainActivity.
+     */
+    override fun onSharedPreferenceChanged(sharedPrefs: SharedPreferences?, key: String?) {
+        if (key == getString(R.string.invert_key)) {
+            val invert = sharedPrefs!!.getBoolean(getString(R.string.invert_key), resources.getBoolean(R.bool.invert_default))
+            val rotation = if(invert) 180.0f else 0.0f
+            imageViewForeground.rotation = rotation
+            imageViewBackground.rotation = rotation
+        }
+        else if (key == getString(R.string.background_moon_key)) {
+            val displayBackgroundMoon = sharedPrefs!!.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
+            val drawable = if(displayBackgroundMoon) R.drawable.background_moon else 0
+            imageViewBackground.setImageResource(drawable)
+        }
+        else if (key == getString(R.string.sky_key)) {
+            val sky = Skies.fromPrefs(this, sharedPrefs!!.getString(key, getString(R.string.sky_value_default)))
+            constraintLayout.setBackgroundResource(sky.drawable)
+        }
+    }
+
+    /**
+     * Override to add current phase to [outState].
+     *
+     * Although any change of phase is insignificant, and is likely because user is
+     * having fun, change must be persisted across configuration changes.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putSerializable(CURRENT_PHASE, currentPhase)
+    }
+
+    /**
+     * Override to unregister shared preferences listener.
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    /**
+     * Increment to next phase of moon (just for fun)
      * Clicked ImageView [i] is unused.
      */
     fun nextPhase(i: View) {
@@ -131,11 +171,8 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         // Increment to next sky.
         val nextSky = Skies.getNextSky(currentSky)
 
-        // Save to shared preferences.
+        // Save to shared preferences (allow listener to apply changes).
         sharedPrefs.edit().putString(getString(R.string.sky_key), Skies.toPrefs(this, nextSky)).commit()
-
-        // Display.
-        constraintLayout.setBackgroundResource(nextSky.drawable)
     }
 
     /**
