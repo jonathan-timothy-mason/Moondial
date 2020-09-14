@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Moondial</string>
+    <string name="title_activity_settings">Settings</string>
 
+    <!-- Phase descriptions. -->
     <string name="new_moon">New Moon</string>
     <string name="day_old">Day Old</string>
     <string name="waxing_crescent_thin">Waxing Crescent</string>
@@ -18,4 +20,44 @@
     <string name="waning_crescent_thick">Waning Crescent</string>
     <string name="waning_crescent">Waning Crescent</string>
     <string name="waning_crescent_thin">Waning Crescent</string>
+
+    <!-- Main menu. -->
+    <string name="action_settings">Settings</string>
+    <string name="action_acknowledgments">Acknowledgments</string>
+
+    <!-- Preferences -->
+
+    <!-- Keys -->
+    <string name="background_moon_key" translatable="false">background_moon</string>
+    <string name="sky_key" translatable="false">sky</string>
+    <string name="invert_key" translatable="false">invert</string>
+
+    <!-- Headings -->
+    <string name="appearance_header">Appearance</string>
+    <string name="location_header">Location</string>
+
+    <!-- Display Background Moon Preferences. -->
+    <string name="background_moon_title">Display Background Moon</string>
+
+    <!-- Display Sky Preferences. -->
+    <string name="sky_title">Sky</string>
+    <string name="sky_entry_day_light">Day, Light</string>
+    <string name="sky_entry_day_dark">Day, Dark</string>
+    <string name="sky_entry_twilight_light">Twilight, Light</string>
+    <string name="sky_entry_twilight_dark">Twilight, Dark</string>
+    <string name="sky_entry_night_light">Night, Light</string>
+    <string name="sky_entry_night_dark">Night, Dark</string>
+    <string name="sky_value_day_light">day_light</string>
+    <string name="sky_value_day_dark">day_dark</string>
+    <string name="sky_value_twilight_light">twilight_light</string>
+    <string name="sky_value_twilight_dark">twilight_dark</string>
+    <string name="sky_value_night_light">night_light</string>
+    <string name="sky_value_night_dark">night_dark</string>
+    <string name="sky_value_default">@string/sky_value_twilight_dark</string>
+
+    <!-- Invert Preferences. -->
+    <string name="invert_title">Invert</string>
+    <string name="invert_summary_on">Southern Hemisphere</string>
+    <string name="invert_summary_off">Northern Hemisphere</string>
+
 </resources>
