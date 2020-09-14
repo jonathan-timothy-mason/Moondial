@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageViewLower"
+        android:id="@+id/imageViewBackground"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:src="@drawable/new_moon"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewUpper"
+        android:id="@+id/imageViewForeground"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:scaleType="center"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewPhaseCaption"
+        android:id="@+id/textViewPhaseDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

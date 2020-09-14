@@ -1,0 +1,20 @@
+<resources>
+
+    <string-array name="sky_entries">
+        <item>@string/sky_entry_day_light</item>
+        <item>@string/sky_entry_day_dark</item>
+        <item>@string/sky_entry_twilight_light</item>
+        <item>@string/sky_entry_twilight_dark</item>
+        <item>@string/sky_entry_night_light</item>
+        <item>@string/sky_entry_night_dark</item>
+    </string-array>
+
+    <string-array name="sky_values">
+        <item>@string/sky_value_day_light</item>
+        <item>@string/sky_value_day_dark</item>
+        <item>@string/sky_value_twilight_light</item>
+        <item>@string/sky_value_twilight_dark</item>
+        <item>@string/sky_value_night_light</item>
+        <item>@string/sky_value_night_dark</item>
+    </string-array>
+</resources>
