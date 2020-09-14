@@ -15,8 +15,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
  * Todo:
  * Icon.
  * Widget.
- * Default enums, etc.
+ * Make new moon disappear if background moon is turned on amd it's displaying.
+ * Add prefs listener.
  */
+
+const val CURRENT_PHASE = "CURRENT_PHASE"
 
 /**
  * Main screen of app, displaying moon and its phases.
@@ -42,6 +45,9 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         imageViewBackground = this.findViewById(R.id.imageViewBackground)
         textViewPhaseDescription =  this.findViewById(R.id.textViewPhaseDescription)
 
+        if(savedInstanceState != null)
+            currentPhase = savedInstanceState.getSerializable(CURRENT_PHASE) as Phases
+
         this.setupSharedPreferences()
 
         this.updatePhase()
@@ -54,6 +60,12 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putSerializable(CURRENT_PHASE, currentPhase)
     }
 
     /**
