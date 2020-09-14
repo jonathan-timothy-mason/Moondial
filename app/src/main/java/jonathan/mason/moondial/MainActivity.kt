@@ -142,19 +142,7 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
      * Update image displaying phase of moon and its description.
      */
     private fun updatePhase() {
-        if(currentPhase == Phases.NewMoon) {
-            val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-            val displayBackgroundMoon = sharedPrefs.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-            if(displayBackgroundMoon)
-                imageViewForeground.setImageResource(0)
-            else
-                imageViewForeground.setImageResource(currentPhase.drawable)
-        }
-        else
-        {
-            imageViewForeground.setImageResource(currentPhase.drawable)
-        }
-
+        imageViewForeground.setImageResource(currentPhase.drawable)
         textViewPhaseDescription.text = this.getText(currentPhase.stringName)
     }
 }
