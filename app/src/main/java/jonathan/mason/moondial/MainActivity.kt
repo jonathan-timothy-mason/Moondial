@@ -14,10 +14,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 /**
  * Todo:
- * Icon.
  * Widget.
  * Reset actual phase.
  * Acknowledgments.
+ * Turn caption on/off.
  */
 
 const val CURRENT_PHASE = "CURRENT_PHASE"
