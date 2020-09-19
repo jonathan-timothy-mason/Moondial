@@ -8,27 +8,27 @@ import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 /**
  * Todo:
  * Widget.
- * Reset actual phase.
  * Acknowledgments.
- * Turn caption on/off.
  */
 
-const val CURRENT_PHASE = "CURRENT_PHASE"
+const val DISPLAY_PHASE = "DISPLAY_PHASE"
 
 /**
  * Main screen of app, displaying moon and its phases.
  * Current phase of the moon resides in [currentPhase].
  */
-class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity(val currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, View.OnLongClickListener {
+    private var displayPhase = currentPhase
+    private var displayPhaseChanged = false
 
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var imageViewForeground: ImageView
@@ -48,11 +48,15 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         imageViewBackground = this.findViewById(R.id.imageViewBackground)
         textViewPhaseDescription =  this.findViewById(R.id.textViewPhaseDescription)
 
+        // Allow long press anywhere to reset to current phase.
+        constraintLayout.setOnLongClickListener(this)
+        imageViewForeground.setOnLongClickListener(this)
+
+        // Restore any change of phase because user is having a play.
         if(savedInstanceState != null)
-            currentPhase = savedInstanceState.getSerializable(CURRENT_PHASE) as Phases
+            displayPhase = savedInstanceState.getSerializable(DISPLAY_PHASE) as Phases
 
         this.setupSharedPreferences()
-
         this.updatePhase()
     }
 
@@ -98,7 +102,7 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         // Display phase description.
         val displayPhaseDescription = sharedPrefs.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
         if(!displayPhaseDescription)
-            textViewPhaseDescription.visibility = INVISIBLE
+            textViewPhaseDescription.visibility = GONE
 
         // Sky.
         val sky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
@@ -126,7 +130,7 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
         }
         else if (key == getString(R.string.phase_description_key)) {
             val displayPhaseDescription = sharedPrefs!!.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
-            val visibility = if(displayPhaseDescription) VISIBLE else INVISIBLE
+            val visibility = if(displayPhaseDescription) VISIBLE else GONE
             textViewPhaseDescription.visibility = visibility
         }
         else if (key == getString(R.string.sky_key)) {
@@ -150,7 +154,7 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState?.putSerializable(CURRENT_PHASE, currentPhase)
+        outState?.putSerializable(DISPLAY_PHASE, displayPhase)
     }
 
     /**
@@ -167,8 +171,27 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
      * Clicked ImageView [i] is unused.
      */
     fun nextPhase(i: View) {
-        currentPhase = Phases.getNextPhase(currentPhase)
+        if(!displayPhaseChanged && (displayPhase == currentPhase)) {
+            displayPhaseChanged = true
+            Toast.makeText(this, getString(R.string.reset_current_phase), Toast.LENGTH_LONG).show()
+        }
+
+        displayPhase = Phases.getNextPhase(displayPhase)
         this.updatePhase()
+    }
+
+    /**
+     * Reset to current moon phase.
+     * Clicked View [i] is unused.
+     */
+    override fun onLongClick(i: View): Boolean {
+        if(displayPhase != currentPhase) {
+            displayPhase = currentPhase
+            this.updatePhase()
+            return true
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -191,7 +214,7 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
      * Update image displaying phase of moon and its description.
      */
     private fun updatePhase() {
-        imageViewForeground.setImageResource(currentPhase.drawable)
-        textViewPhaseDescription.text = this.getText(currentPhase.stringName)
+        imageViewForeground.setImageResource(displayPhase.drawable)
+        textViewPhaseDescription.text = this.getText(displayPhase.stringName)
     }
 }
