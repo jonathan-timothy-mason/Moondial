@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Moondial</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_acknowledgments">Acknowledgments</string>
     <string name="reset_current_phase">Press and hold to reset.</string>
+    <string name="photo_acknowledgment">Full Moon at Kennedy Space Center\nby Kim Shiflett of NASA,\n9th August 2017.</string>
 
     <!-- Phase descriptions. -->
     <string name="new_moon">New Moon</string>

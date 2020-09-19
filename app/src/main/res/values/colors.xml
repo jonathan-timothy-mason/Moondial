@@ -35,5 +35,6 @@
     <color name="colorNightDarkStart">@color/colorSpace</color>
     <color name="colorNightDarkEnd">@color/colorSpaceDark</color>
 
-    <color name="colorPhaseCaption">#FFFFFF</color>
+    <color name="colorPhaseDescription">#FFFFFF</color>
+    <color name="colorAcknowledgments">#FFFFFF</color>
 </resources>

@@ -17,7 +17,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 /**
  * Todo:
  * Widget.
- * Acknowledgments.
+ * Allow image to be made smaller for watch.
+ * Image descriptions.
  */
 
 const val DISPLAY_PHASE = "DISPLAY_PHASE"
@@ -26,7 +27,7 @@ const val DISPLAY_PHASE = "DISPLAY_PHASE"
  * Main screen of app, displaying moon and its phases.
  * Current phase of the moon resides in [currentPhase].
  */
-class MainActivity(val currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, View.OnLongClickListener {
+class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPhase()) : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, View.OnLongClickListener {
     private var displayPhase = currentPhase
     private var displayPhaseChanged = false
 
@@ -80,9 +81,9 @@ class MainActivity(val currentPhase: Phases = Phases.calculateCurrentPhase()) : 
             startActivity(intent)
             return true
         } else if (id == R.id.action_acknowledgments) {
-            //val intent = Intent(this, AcknowledgmentsActivity::class.java)
-            //startActivity(intent)
-            //return true
+            val intent = Intent(this, AcknowledgmentsActivity::class.java)
+            startActivity(intent)
+            return true
         }
 
         return super.onOptionsItemSelected(item)
