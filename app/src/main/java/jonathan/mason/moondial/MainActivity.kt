@@ -8,6 +8,8 @@ import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -88,21 +90,26 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
     private fun setupSharedPreferences() {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
 
+        // Display background moon.
+        val displayBackgroundMoon = sharedPrefs.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
+        if(!displayBackgroundMoon)
+            imageViewBackground.setImageResource(0) // From answer to "How to clear an ImageView in Android?" by Mario Lenci: https://stackoverflow.com/questions/2859212/how-to-clear-an-imageview-in-android.
+
+        // Display phase description.
+        val displayPhaseDescription = sharedPrefs.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
+        if(!displayPhaseDescription)
+            textViewPhaseDescription.visibility = INVISIBLE
+
+        // Sky.
+        val sky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
+        constraintLayout.setBackgroundResource(sky.drawable)
+
         // Invert.
         val invert = sharedPrefs.getBoolean(getString(R.string.invert_key), resources.getBoolean(R.bool.invert_default))
         if(invert) {
             imageViewForeground.rotation = 180.0f
             imageViewBackground.rotation = 180.0f
         }
-
-        // Display background moon.
-        val displayBackgroundMoon = sharedPrefs.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-        if(!displayBackgroundMoon)
-            imageViewBackground.setImageResource(0) // From answer to "How to clear an ImageView in Android?" by Mario Lenci: https://stackoverflow.com/questions/2859212/how-to-clear-an-imageview-in-android.
-
-        // Sky.
-        val sky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
-        constraintLayout.setBackgroundResource(sky.drawable)
 
         sharedPrefs.registerOnSharedPreferenceChangeListener(this)
     }
@@ -112,20 +119,25 @@ class MainActivity(var currentPhase: Phases = Phases.calculateCurrentPhase()) : 
      * key [key] are immediately applied to MainActivity.
      */
     override fun onSharedPreferenceChanged(sharedPrefs: SharedPreferences?, key: String?) {
-        if (key == getString(R.string.invert_key)) {
-            val invert = sharedPrefs!!.getBoolean(getString(R.string.invert_key), resources.getBoolean(R.bool.invert_default))
-            val rotation = if(invert) 180.0f else 0.0f
-            imageViewForeground.rotation = rotation
-            imageViewBackground.rotation = rotation
-        }
-        else if (key == getString(R.string.background_moon_key)) {
+        if (key == getString(R.string.background_moon_key)) {
             val displayBackgroundMoon = sharedPrefs!!.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
             val drawable = if(displayBackgroundMoon) R.drawable.background_moon else 0
             imageViewBackground.setImageResource(drawable)
         }
+        else if (key == getString(R.string.phase_description_key)) {
+            val displayPhaseDescription = sharedPrefs!!.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
+            val visibility = if(displayPhaseDescription) VISIBLE else INVISIBLE
+            textViewPhaseDescription.visibility = visibility
+        }
         else if (key == getString(R.string.sky_key)) {
             val sky = Skies.fromPrefs(this, sharedPrefs!!.getString(key, getString(R.string.sky_value_default)))
             constraintLayout.setBackgroundResource(sky.drawable)
+        }
+        else if (key == getString(R.string.invert_key)) {
+            val invert = sharedPrefs!!.getBoolean(getString(R.string.invert_key), resources.getBoolean(R.bool.invert_default))
+            val rotation = if(invert) 180.0f else 0.0f
+            imageViewForeground.rotation = rotation
+            imageViewBackground.rotation = rotation
         }
     }
 

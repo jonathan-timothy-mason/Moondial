@@ -23,6 +23,11 @@
             app:title="@string/background_moon_title"
             app:defaultValue="@bool/background_moon_default"/>
 
+        <SwitchPreferenceCompat
+            app:key="@string/phase_description_key"
+            app:title="@string/phase_description_title"
+            app:defaultValue="@bool/phase_description_default"/>
+
         <ListPreference
             app:key="@string/sky_key"
             app:title="@string/sky_title"

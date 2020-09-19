@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="invert_default">false</bool>
     <bool name="background_moon_default">true</bool>
+    <bool name="phase_description_default">true</bool>
+    <bool name="invert_default">false</bool>
 </resources>

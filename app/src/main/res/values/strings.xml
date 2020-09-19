@@ -29,6 +29,7 @@
 
     <!-- Keys -->
     <string name="background_moon_key" translatable="false">background_moon</string>
+    <string name="phase_description_key" translatable="false">phase_description</string>
     <string name="sky_key" translatable="false">sky</string>
     <string name="invert_key" translatable="false">invert</string>
 
@@ -36,10 +37,13 @@
     <string name="appearance_header">Appearance</string>
     <string name="location_header">Location</string>
 
-    <!-- Display Background Moon Preferences. -->
+    <!-- Display Background Moon Preference. -->
     <string name="background_moon_title">Display Background Moon</string>
 
-    <!-- Display Sky Preferences. -->
+    <!-- Display Phase Description Preference. -->
+    <string name="phase_description_title">Display Phase Description</string>
+
+    <!-- Display Sky Preference. -->
     <string name="sky_title">Sky</string>
     <string name="sky_entry_day_light">Day, Light</string>
     <string name="sky_entry_day_dark">Day, Dark</string>
@@ -55,7 +59,7 @@
     <string name="sky_value_night_dark">night_dark</string>
     <string name="sky_value_default">@string/sky_value_twilight_dark</string>
 
-    <!-- Invert Preferences. -->
+    <!-- Invert Preference. -->
     <string name="invert_title">Invert</string>
     <string name="invert_summary_on">Southern Hemisphere</string>
     <string name="invert_summary_off">Northern Hemisphere</string>
