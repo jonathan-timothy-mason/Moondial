@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Moondial</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="reset_current_phase">Press and hold to reset.</string>
 
     <!-- Phase descriptions. -->
     <string name="new_moon">New Moon</string>
