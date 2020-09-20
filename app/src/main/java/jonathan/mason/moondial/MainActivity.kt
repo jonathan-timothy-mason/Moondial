@@ -14,13 +14,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
-/**
- * Todo:
- * Widget.
- * Allow image to be made smaller for watch.
- * Image descriptions.
- */
-
 const val DISPLAY_PHASE = "DISPLAY_PHASE"
 
 /**

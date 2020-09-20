@@ -10,10 +10,11 @@
 
     <ImageView
         android:id="@+id/imageViewBackground"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:src="@drawable/background_moon"
-        android:scaleType="center"
+        android:scaleType="centerInside"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +22,10 @@
 
     <ImageView
         android:id="@+id/imageViewForeground"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
-        android:scaleType="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:contentDescription="@null"
         android:onClick="nextPhase"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
