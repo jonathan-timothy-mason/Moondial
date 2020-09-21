@@ -8,8 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="PhaseDescription">
-        <item name="android:textSize">@dimen/phase_description_textsize</item>
+    <style name="AppPhaseDescription">
+        <item name="android:textSize">@dimen/app_phase_description_textsize</item>
+        <item name="android:textColor">@color/colorPhaseDescription</item>
+    </style>
+
+    <style name="WidgetPhaseDescription">
+        <item name="android:textSize">@dimen/widget_phase_description_textsize</item>
         <item name="android:textColor">@color/colorPhaseDescription</item>
     </style>
 

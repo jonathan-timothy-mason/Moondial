@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="phase_description_textsize">20sp</dimen> <!-- Material Design, Heading 6 -->
+    <dimen name="app_phase_description_textsize">20sp</dimen> <!-- Material Design, Heading 6 -->
+    <dimen name="widget_phase_description_textsize">16sp</dimen> <!-- Material Design, Subtitle 1 -->
     <dimen name="acknowledgments_textsize">12sp</dimen> <!-- Material Design, Caption -->
+    <dimen name="widget_additional_margin">16dp</dimen>
+    <dimen name="sky_radius">12dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

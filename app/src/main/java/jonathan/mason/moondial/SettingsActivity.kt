@@ -1,5 +1,6 @@
 package jonathan.mason.moondial
 
+import android.appwidget.AppWidgetManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
@@ -30,5 +31,14 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
         }
+    }
+
+    /**
+     * Override to update widgets according to changed shared preferences.
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+
+        MoondialWidget.updateAllAppWidgets(this.applicationContext, AppWidgetManager.getInstance(this.applicationContext))
     }
 }

@@ -6,23 +6,23 @@
     <string name="photo_acknowledgment">Full Moon at Kennedy Space Center\nby Kim Shiflett of NASA,\n9th August 2017.</string>
 
     <!-- Phase descriptions. -->
-    <string name="new_moon">New Moon</string>
-    <string name="day_old">Day Old</string>
-    <string name="waxing_crescent_thin">Waxing Crescent</string>
-    <string name="waxing_crescent">Waxing Crescent</string>
-    <string name="waxing_crescent_thick">Waxing Crescent</string>
-    <string name="first_quarter">First Quarter</string>
-    <string name="waxing_gibbous_thin">Waxing Gibbous</string>
-    <string name="waxing_gibbous">Waxing Gibbous</string>
-    <string name="waxing_gibbous_thick">Waxing Gibbous</string>
-    <string name="full_moon">Full Moon</string>
-    <string name="waning_gibbous_thick">Waning Gibbous</string>
-    <string name="waning_gibbous">Waning Gibbous</string>
-    <string name="waning_gibbous_thin">Waning Gibbous</string>
-    <string name="last_quarter">Last Quarter</string>
-    <string name="waning_crescent_thick">Waning Crescent</string>
-    <string name="waning_crescent">Waning Crescent</string>
-    <string name="waning_crescent_thin">Waning Crescent</string>
+    <string name="new_moon">New\nMoon</string>
+    <string name="day_old">Day\nOld</string>
+    <string name="waxing_crescent_thin">Waxing\nCrescent</string>
+    <string name="waxing_crescent">Waxing\nCrescent</string>
+    <string name="waxing_crescent_thick">Waxing\nCrescent</string>
+    <string name="first_quarter">First\nQuarter</string>
+    <string name="waxing_gibbous_thin">Waxing\nGibbous</string>
+    <string name="waxing_gibbous">Waxing\nGibbous</string>
+    <string name="waxing_gibbous_thick">Waxing\nGibbous</string>
+    <string name="full_moon">Full\nMoon</string>
+    <string name="waning_gibbous_thick">Waning\nGibbous</string>
+    <string name="waning_gibbous">Waning\nGibbous</string>
+    <string name="waning_gibbous_thin">Waning\nGibbous</string>
+    <string name="last_quarter">Last\nQuarter</string>
+    <string name="waning_crescent_thick">Waning\nCrescent</string>
+    <string name="waning_crescent">Waning\nCrescent</string>
+    <string name="waning_crescent_thin">Waning\nCrescent</string>
 
     <!-- Main menu. -->
     <string name="action_settings">Settings</string>

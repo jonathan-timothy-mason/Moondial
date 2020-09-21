@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/widget_margin">
+
+    <ImageView
+        android:id="@+id/imageViewSky"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.40"
+        android:contentDescription="@null"/>
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_moon"
+        android:scaleType="centerInside"
+        android:contentDescription="@null"
+        android:padding="@dimen/widget_additional_margin"/>
+
+    <ImageView
+        android:id="@+id/imageViewForeground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:contentDescription="@null"
+        android:padding="@dimen/widget_additional_margin"/>
+
+    <TextView
+        android:id="@+id/textViewPhaseDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/moon_scrim"
+        style="@style/WidgetPhaseDescription"
+        tools:text="Phase..."
+        android:padding="@dimen/widget_additional_margin"/>
+
+</RelativeLayout>

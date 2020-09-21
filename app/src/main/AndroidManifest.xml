@@ -9,6 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".MoondialWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/moondial_widget_info" />
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">
@@ -26,7 +36,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="jonathan.mason.moondial.MainActivity" />
         </activity>
-        <activity android:name=".AcknowledgmentsActivity"
+        <activity
+            android:name=".AcknowledgmentsActivity"
             android:label="@string/title_activity_acknowledgments"
             android:parentActivityName=".MainActivity">
             <meta-data

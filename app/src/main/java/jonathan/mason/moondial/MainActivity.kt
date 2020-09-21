@@ -42,8 +42,7 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
         imageViewBackground = this.findViewById(R.id.imageViewBackground)
         textViewPhaseDescription =  this.findViewById(R.id.textViewPhaseDescription)
 
-        // Allow long press anywhere to reset to current phase.
-        constraintLayout.setOnLongClickListener(this)
+        // Long press to reset to current phase.
         imageViewForeground.setOnLongClickListener(this)
 
         // Restore any change of phase because user is having a play.
@@ -90,13 +89,11 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
 
         // Display background moon.
         val displayBackgroundMoon = sharedPrefs.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-        if(!displayBackgroundMoon)
-            imageViewBackground.setImageResource(0) // From answer to "How to clear an ImageView in Android?" by Mario Lenci: https://stackoverflow.com/questions/2859212/how-to-clear-an-imageview-in-android.
+        imageViewBackground.visibility = if(displayBackgroundMoon) VISIBLE else GONE
 
         // Display phase description.
         val displayPhaseDescription = sharedPrefs.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
-        if(!displayPhaseDescription)
-            textViewPhaseDescription.visibility = GONE
+        textViewPhaseDescription.visibility = if(displayPhaseDescription) VISIBLE else GONE
 
         // Sky.
         val sky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
@@ -119,13 +116,11 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
     override fun onSharedPreferenceChanged(sharedPrefs: SharedPreferences?, key: String?) {
         if (key == getString(R.string.background_moon_key)) {
             val displayBackgroundMoon = sharedPrefs!!.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-            val drawable = if(displayBackgroundMoon) R.drawable.background_moon else 0
-            imageViewBackground.setImageResource(drawable)
+            imageViewBackground.visibility = if(displayBackgroundMoon) VISIBLE else GONE
         }
         else if (key == getString(R.string.phase_description_key)) {
             val displayPhaseDescription = sharedPrefs!!.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
-            val visibility = if(displayPhaseDescription) VISIBLE else GONE
-            textViewPhaseDescription.visibility = visibility
+            textViewPhaseDescription.visibility = if(displayPhaseDescription) VISIBLE else GONE
         }
         else if (key == getString(R.string.sky_key)) {
             val sky = Skies.fromPrefs(this, sharedPrefs!!.getString(key, getString(R.string.sky_value_default)))
@@ -186,22 +181,6 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
         } else {
             return false;
         }
-    }
-
-    /**
-     * Increment appearance of sky.
-     * Clicked ConstraintLayout [c] is unused.
-     */
-    fun nextSky(c: View) {
-        // Get current sky from shared preferences.
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val currentSky = Skies.fromPrefs(this, sharedPrefs.getString(getString(R.string.sky_key), getString(R.string.sky_value_default)))
-
-        // Increment to next sky.
-        val nextSky = Skies.getNextSky(currentSky)
-
-        // Save to shared preferences (allow listener to apply changes).
-        sharedPrefs.edit().putString(getString(R.string.sky_key), Skies.toPrefs(this, nextSky)).commit()
     }
 
     /**

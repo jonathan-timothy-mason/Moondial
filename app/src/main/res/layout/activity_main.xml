@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="nextSky"
     tools:context=".MainActivity">
 
     <ImageView
@@ -38,7 +37,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="@drawable/moon_scrim"
-        style="@style/PhaseDescription"
+        style="@style/AppPhaseDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
