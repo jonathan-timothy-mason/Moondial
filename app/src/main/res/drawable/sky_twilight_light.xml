@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- From answer to "can we make multi color gradient in xml for android background?" by Maryam Azhdari:
      https://stackoverflow.com/questions/42529142/can-we-make-multi-color-gradient-in-xml-for-android-background. -->
-<shape    xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient android:startColor="@color/colorTwilightLightStart"
         android:centerColor="@color/colorTwilightLightCenter"
         android:endColor="@color/colorTwilightLightEnd"
