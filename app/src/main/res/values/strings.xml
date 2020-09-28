@@ -60,7 +60,7 @@
     <string name="sky_value_twilight_dark">twilight_dark</string>
     <string name="sky_value_night_light">night_light</string>
     <string name="sky_value_night_dark">night_dark</string>
-    <string name="sky_value_default">@string/sky_value_twilight_dark</string>
+    <string name="sky_value_default">@string/sky_value_day_dark</string>
 
     <!-- Invert Preference. -->
     <string name="invert_title">Invert</string>

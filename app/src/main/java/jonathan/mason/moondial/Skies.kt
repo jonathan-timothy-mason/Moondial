@@ -27,14 +27,14 @@ enum class Skies(val drawable: Int, val roundedDrawable: Int) {
          * Convert shared preferences sky value [prefsValue] to corresponding "Skies"
          * enumeration value.
          */
-        fun fromPrefs(context: Context, prefsValue: String): Skies {
+        fun fromPrefs(context: Context, prefsValue: String?): Skies {
             return when(prefsValue) {
                 context.getString(R.string.sky_value_day_light) -> DayLight
                 context.getString(R.string.sky_value_day_dark) -> DayDark
                 context.getString(R.string.sky_value_twilight_light) -> TwighlightLight
                 context.getString(R.string.sky_value_night_light) -> NightLight
                 context.getString(R.string.sky_value_night_dark) -> NightDark
-                else -> TwighlightDark
+                else -> DayDark
             }
         }
 
