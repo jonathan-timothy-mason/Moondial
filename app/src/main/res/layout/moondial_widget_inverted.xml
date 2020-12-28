@@ -5,12 +5,6 @@
     android:padding="@dimen/widget_margin">
 
     <ImageView
-        android:id="@+id/imageViewSky"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@null"/>
-
-    <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,12 +23,20 @@
         android:contentDescription="@null"
         android:padding="@dimen/widget_additional_margin"/>
 
+    <ImageView
+        android:id="@+id/viewScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:contentDescription="@null"
+        android:src="@drawable/moon_scrim"
+        android:padding="@dimen/widget_additional_margin"/>
+
     <TextView
         android:id="@+id/textViewPhaseDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@drawable/moon_scrim"
         style="@style/WidgetPhaseDescription"
         tools:text="Phase..."
         android:padding="@dimen/widget_additional_margin"/>

@@ -27,6 +27,7 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var imageViewForeground: ImageView
     private lateinit var imageViewBackground: ImageView
+    private lateinit var imageViewScrim: ImageView
     private lateinit var textViewPhaseDescription: TextView
 
     /**
@@ -40,10 +41,11 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
         constraintLayout = this.findViewById(R.id.constraintLayout)
         imageViewForeground = this.findViewById(R.id.imageViewForeground)
         imageViewBackground = this.findViewById(R.id.imageViewBackground)
+        imageViewScrim = this.findViewById(R.id.imageViewScrim)
         textViewPhaseDescription =  this.findViewById(R.id.textViewPhaseDescription)
 
         // Long press to reset to current phase.
-        imageViewForeground.setOnLongClickListener(this)
+        imageViewScrim.setOnLongClickListener(this)
 
         // Restore any change of phase because user is having a play.
         if(savedInstanceState != null)
@@ -87,10 +89,6 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
     private fun setupSharedPreferences() {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        // Display background moon.
-        val displayBackgroundMoon = sharedPrefs.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-        imageViewBackground.visibility = if(displayBackgroundMoon) VISIBLE else GONE
-
         // Display phase description.
         val displayPhaseDescription = sharedPrefs.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
         textViewPhaseDescription.visibility = if(displayPhaseDescription) VISIBLE else GONE
@@ -114,11 +112,7 @@ class MainActivity(private val currentPhase: Phases = Phases.calculateCurrentPha
      * key [key] are immediately applied to MainActivity.
      */
     override fun onSharedPreferenceChanged(sharedPrefs: SharedPreferences?, key: String?) {
-        if (key == getString(R.string.background_moon_key)) {
-            val displayBackgroundMoon = sharedPrefs!!.getBoolean(getString(R.string.background_moon_key), resources.getBoolean(R.bool.background_moon_default))
-            imageViewBackground.visibility = if(displayBackgroundMoon) VISIBLE else GONE
-        }
-        else if (key == getString(R.string.phase_description_key)) {
+        if (key == getString(R.string.phase_description_key)) {
             val displayPhaseDescription = sharedPrefs!!.getBoolean(getString(R.string.phase_description_key), resources.getBoolean(R.bool.phase_description_default))
             textViewPhaseDescription.visibility = if(displayPhaseDescription) VISIBLE else GONE
         }

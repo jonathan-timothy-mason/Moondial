@@ -11,8 +11,8 @@ android {
         applicationId "jonathan.mason.moondial"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 2
-        versionName '2.0'
+        versionCode 3
+        versionName '3.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     // From answer to "Why I don't have installRelease in my gradle tasks?" by Ngenge S:

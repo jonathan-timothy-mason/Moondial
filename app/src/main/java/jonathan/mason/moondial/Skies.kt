@@ -7,13 +7,13 @@ import android.content.Context
  *
  * Each sky has IDs corresponding to gradients [drawable] and [roundedDrawable].
  */
-enum class Skies(val drawable: Int, val roundedDrawable: Int) {
-    DayLight(R.drawable.sky_day_light, R.drawable.sky_day_light_rounded),
-    DayDark(R.drawable.sky_day_dark, R.drawable.sky_day_dark_rounded),
-    TwighlightLight(R.drawable.sky_twilight_light, R.drawable.sky_twilight_light_rounded),
-    TwighlightDark(R.drawable.sky_twilight_dark, R.drawable.sky_twilight_dark_rounded),
-    NightLight(R.drawable.sky_night_light, R.drawable.sky_night_light_rounded),
-    NightDark(R.drawable.sky_night_dark, R.drawable.sky_night_dark_rounded);
+enum class Skies(val drawable: Int) {
+    DayLight(R.drawable.sky_day_light),
+    DayDark(R.drawable.sky_day_dark),
+    TwighlightLight(R.drawable.sky_twilight_light),
+    TwighlightDark(R.drawable.sky_twilight_dark),
+    NightLight(R.drawable.sky_night_light),
+    NightDark(R.drawable.sky_night_dark);
 
     companion object {
         /**

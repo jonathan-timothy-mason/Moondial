@@ -31,7 +31,6 @@
     <!-- Preferences -->
 
     <!-- Keys -->
-    <string name="background_moon_key" translatable="false">background_moon</string>
     <string name="phase_description_key" translatable="false">phase_description</string>
     <string name="sky_key" translatable="false">sky</string>
     <string name="invert_key" translatable="false">invert</string>
@@ -39,9 +38,6 @@
     <!-- Headings -->
     <string name="appearance_header">Appearance</string>
     <string name="location_header">Location</string>
-
-    <!-- Display Background Moon Preference. -->
-    <string name="background_moon_title">Display Background Moon</string>
 
     <!-- Display Phase Description Preference. -->
     <string name="phase_description_title">Display Phase Description</string>

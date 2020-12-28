@@ -4,7 +4,6 @@
     <dimen name="widget_phase_description_textsize">16sp</dimen> <!-- Material Design, Subtitle 1 -->
     <dimen name="acknowledgments_textsize">12sp</dimen> <!-- Material Design, Caption -->
     <dimen name="widget_additional_margin">16dp</dimen>
-    <dimen name="sky_radius">12dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

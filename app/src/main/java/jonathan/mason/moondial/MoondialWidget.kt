@@ -34,19 +34,15 @@ class MoondialWidget : AppWidgetProvider() {
         private fun createRemoteViews(context: Context): RemoteViews {
             // Get shared preferences.
             val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-            val displayBackgroundMoon = sharedPrefs.getBoolean(context.getString(R.string.background_moon_key), context.resources.getBoolean(R.bool.background_moon_default))
             val displayPhaseDescription = sharedPrefs.getBoolean(context.getString(R.string.phase_description_key), context.resources.getBoolean(R.bool.phase_description_default))
-            val sky = Skies.fromPrefs(context, sharedPrefs.getString(context.getString(R.string.sky_key), context.getString(R.string.sky_value_default)))
             val invert = sharedPrefs.getBoolean(context.getString(R.string.invert_key), context.resources.getBoolean(R.bool.invert_default))
 
             // Now that we know whether to invert or not, create RemoteViews with normal
             // or inverted version of layout.
             val views = RemoteViews(context.packageName, if(invert) R.layout.moondial_widget_inverted else R.layout.moondial_widget)
 
-            // Set visibility of responsible views according to shared preferences.
-            views.setViewVisibility(R.id.imageViewBackground, if(displayBackgroundMoon) View.VISIBLE else View.GONE)
+            // Set visibility of view responsible for phase description according to shared preferences.
             views.setViewVisibility(R.id.textViewPhaseDescription, if(displayPhaseDescription) View.VISIBLE else View.GONE)
-            views.setImageViewResource(R.id.imageViewSky, sky.roundedDrawable)
 
             // Setup RemoteView to launch MainActivity screen if widget is clicked.
             val intent = Intent(context, MainActivity::class.java)
